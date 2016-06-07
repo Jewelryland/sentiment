@@ -6,6 +6,7 @@ from bs4 import BeautifulSoup
 from glob import glob
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.feature_selection.univariate_selection import SelectKBest, chi2
+from preproc import preproc
 
 def read_reviews(path):
     file_paths = glob(path + "/*.txt")
@@ -14,17 +15,6 @@ def read_reviews(path):
         with open(path, "r") as fin:
             reviews.append(fin.read())
     return reviews
-
-def preproc(review, use_stopwords=False):
-    review_text = BeautifulSoup(review, "lxml").get_text()
-    review_text = re.sub("[^a-zA-Z]"," ", review_text)
-
-    if use_stopwords:
-        stops = set(nltk.stopwords.words("english"))
-        words = [w for w in review_text.split() if not w in stops]
-        return " ".join(words)
-
-    return review_text.lower()
 
 def read_data(path):
     pos_reviews = read_reviews(path + "/pos")
@@ -84,4 +74,4 @@ def extract(max_gram, feat_dims, save_model=False):
 # extract(3, [1000, 3000, 5000, 10000, 30000, 70000, 100000])
 # extract(2, [1000, 3000, 5000, 10000, 30000, 70000, 100000])
 # extract(1, [1000, 3000, 5000, 10000, 30000, 70000, 100000])
-extract(3, [30000])
+extract(3, [30000], True)

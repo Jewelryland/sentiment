@@ -70,8 +70,8 @@ def extract(max_gram, feat_dims, save_model=False):
             with open("models/fselect_%d_%d.pkl" % (max_gram, feat_dim), "wb") as fout:
                 pickle.dump(fselect, fout, -1)
 
-# extract(4, [1000, 3000, 5000, 10000, 30000, 70000, 100000])
-# extract(3, [1000, 3000, 5000, 10000, 30000, 70000, 100000])
-# extract(2, [1000, 3000, 5000, 10000, 30000, 70000, 100000])
-# extract(1, [1000, 3000, 5000, 10000, 30000, 70000, 100000])
-extract(3, [30000], True)
+extract(4, [1000, 3000, 10000, 30000, 70000, 100000])
+extract(3, [1000, 3000, 10000, 30000, 70000, 100000])
+extract(2, [1000, 3000, 10000, 30000, 70000, 100000])
+extract(1, [1000, 3000, 10000, 30000, 70000, 100000])
+# extract(3, [30000], True)
